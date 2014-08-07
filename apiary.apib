@@ -1,0 +1,547 @@
+FORMAT: 1A
+HOST: https://158.226.1.139:8088/
+
+# CIP
+Citi Intelligence Platform.
+CIP retrieves regularly the positions of sharable cars in Berlin from IMP. They provide an API that offers the retrieval of historical as well as predicted data. In future a WMS service is also planned.
+
+# Introduction
+
+This is a description of a public REST interface offered by CIP.
+A mockup of this interface can be tried using the URLs listed on the right. For access to the production
+system please write an email to ??
+
+# Group CarSharing Historical Data
+This is a group of all rest resources related to car sharing historical data of operator type SC.
+
+## List of car sharing historical data [/cip-heatmap/rest/heatmap/carsharinghistory/startdate/{startdate}/enddate/{enddate}]    
+
+The data structure contains a list of cars with the following attributes: 
+
+attribute | json data type | comments
+--- | --- | ---
+addressCity | String | the address
+addressCityCode | String | ...
+addressHouseNo | String | ...
+addressStreet | String | ...
+historyTime | DateTime | example format 1402999372000
+latitude | Double | example 52.53243
+longitude | Double | example 13.20386
+model | String | example "smart fortwo"
+scDescription | String | example "B-GO2148"
+seatCount | Integer | example 4
+fueltypeName | String | example "PETROL"
+operatorType | String | example "SC"
+providerName | String | example "car2Go"
+providerType | String | SC- sharing car provider, example "SC"
+
+
+### Getting historical positions of cars [GET]
+Returns all carSharing cars with position and historical date in the range between startdate and enddate
+
++ Parameters
+    + startdate (string, `1404892800000`) ... String. Has example value.
+    + enddate (string, `1404893800000`) ... String. Has example value.
+
++ Response 200 (application/json)
+
+        [{
+            "addressCity": null,
+            "addressCityCode": null,
+            "addressHouseNo": null,
+            "addressStreet": null,
+            "historyTime": 1402999372000,
+            "latitude": 52.52386,
+            "longitude": 13.20386,
+            "model": null,
+            "scDescription": "B-GO2511",
+            "seatCount": null,
+            "fueltypeName": "UNKNOWN",
+            "operatorName": "Car2Go_Berlin",
+            "operatorType": "SC",
+            "providerName": "car2Go",
+            "providerType": "SC"
+            },
+            {
+            "addressCity": null,
+            "addressCityCode": null,
+            "addressHouseNo": null,
+            "addressStreet": null,
+            "historyTime": 1402999372000,
+            "latitude": 52.53243,
+            "longitude": 13.27418,
+            "model": null,
+            "scDescription": "B-GO3454",
+            "seatCount": null,
+            "fueltypeName": "UNKNOWN",
+            "operatorName": "Car2Go_Berlin",
+            "operatorType": "SC",
+            "providerName": "car2Go",
+            "providerType": "SC"
+        }]
+
+
+# Group CarSharing Predictions
+This is a group of all rest resources related to car sharing predicions 
+
+## Single CarSharing Prediction [/cip-heatmap/rest/predict/ModelLocalPrediction/predictiondate/{date}/providerid/{id}/longitude/{lng}/latitude/{lat}]    
+The data structure of the response contains the following attributes: 
+
+attribute | json data type | comments
+--- | --- | ---
+historyTime | DateTime | 1402999372000
+latitude | Double | example 52.53243
+longitude | Double | example 13.20386
+availability | Double | example 0.23455 or NaN if no prediction could be made (interpret as 0)
+error | Double | example 0.0465 or NaN if no prediction could be made (interpret as 0)
+
+### Getting car availability prediction for a given  datetime, provider, long, lat combination [GET]
+
++ Parameters
+    + date (string, `1404892800000`) ... String. Has example value.
+    + id (string, `3`) ... String. Has example value. -1 stands for: all providers
+    + lng (string, `13.4500476`) ... String. Has example value.
+    + lat (string, `52.5031123`) ... String. Has example value.
+
++ Response 200 (application/json)
+
+        [
+            {
+                   "historyTime": 1404892800000,
+                    "latitude": 52.503,
+                    "longitude": 13.45,
+                    "availability": 0.10533295471298565,
+                    "error": 0.037327891204681
+            }
+        ]
+
+## All CarSharing Predictions [/cip-heatmap/rest/predict/ModelLocalPrediction/predictiondate/{date}/providerid/{id}]    
+The data structure of the response contains the following attributes: 
+
+attribute | json data type | comments
+--- | --- | ---
+historyTime | DateTime | 1402999372000
+latitude | Double | example 52.53243
+longitude | Double | example 13.20386
+availability | Double | example 0.23455 
+error | Double | example 0.0465 
+
+### Getting all car availability predictions for a given  datetime, provider combination [GET]
+
++ Parameters
+    + date (string, `1404892800000`) ... String. Has example value.
+    + id (string, `3`) ... String. Has example value. -1 stands for: all providers
+
++ Response 200 (application/json)
+
+        [
+            {
+                   "historyTime": 1404892800000,
+                    "latitude": 52.503,
+                    "longitude": 13.45,
+                    "availability": 0.10533295471298565,
+                    "error": 0.037327891204681
+            },
+            {
+                    "historyTime": 1404892800000,
+                    "latitude": 52.504,
+                    "longitude": 13.46,
+                    "availability": 1.48746,
+                    "error": 0.273
+            }
+        ]
+        
+## List of CarSharing Predictions [/cip-heatmap/rest/predict/ModelLocalPredictions/predictiondate/{date}/providerid/{id}?longitude={lon1}&latitude={lat1}]
+The data structure of the response contains the following attributes: 
+
+attribute | json data type | comments
+--- | --- | ---
+historyTime | DateTime | 1402999372000
+latitude | Double | example 52.53243
+longitude | Double | example 13.20386
+availability | Double | example 0.23455 or NaN if no prediction could be made (interpret as 0)
+error | Double | example 0.0465 or NaN if no prediction could be made (interpret as 0)
+
+### Getting car availability predictions for a given  datetime, provider and list of longitude/latitude combinations [GET]
+
++ Parameters
+    + date (string, `1404892800000`) ... String. Has example value.
+    + id (string, `3`) ... String. Has example value. -1 stands for: all providers
+    + longitude (string, `13.4500476`) ... String. Has example value.
+    + latitude (string, `52.5031123`) ... String. Has example value.
+
++ Response 200 (application/json)
+
+        [
+            {
+                   "historyTime": 1404892800000,
+                    "latitude": 52.503,
+                    "longitude": 13.45,
+                    "availability": 0.10533295471298565,
+                    "error": 0.037327891204681
+            },
+            {
+                    "historyTime": 1404892800000,
+                    "latitude": 52.504,
+                    "longitude": 13.46,
+                    "availability": "NaN",
+                    "error": "NaN"
+            }
+        ]
+        
+# Group Proposal Heatmap
+This is a group of all rest resources related to heatmap as PNG file
+
+## CarSharing Heatmap [/cip-heatmap/rest/wms/carsharing?date={x}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&providerIds={ids}]    
+Get WMS PNG file for carsharing for a specific date, a specific bounding box (place) and for specific providers (e.g. 1 flinkster staion car, 2 flinkster free floating car, 3 car2fo, etc.)
+
+### Getting heatmap as PNG image [GET]
+
++ Parameters
+    + date (required, string, `1404892800000`) ... a date in the history (later also in the future) Has example value.
+    + lllat (required, string, `52.482780222078205`) ... 
+    + lllng (required, string, `13.3154296875`) ...     
+    + rulng (required, string, `13.359375`) ... 
+    + rulat (required, string, `52.50953477032729`) ... 
+    + ids (optional, string, `1,3,4`) ... service provider ids, comma-separated list of numbers. If not specified -> returns image for all available providers
+
++ Request
+
+    + Headers
+        
+            accept: image/png 
+
++ Response 200 (image/png)
+
+    + Body
+    
+            �PNG
+
+
+## BikeSharing Heatmap [/cip-heatmap/rest/wms/bikesharing?date={x}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&providerIds={ids}]    
+Get WMS PNG file for bike for a specific date, a specific bounding box (place) and for specific providers (e.g. 7 nextbike, 8 callAbike, etc.)
+
+### Getting heatmap as PNG image [GET]
+
++ Parameters
+    + date (required, string, `1404892800000`) ... a date in the history (later also in the future) Has example value.
+    + lllat (required, string, `52.482780222078205`) ... 
+    + lllng (required, string, `13.3154296875`) ...     
+    + rulng (required, string, `13.359375`) ... 
+    + rulat (required, string, `52.50953477032729`) ... 
+    + ids (optional, string, `1,3,4`) ... service provider ids, comma-separated list of numbers. If not specified -> returns image for all available providers
+
++ Request
+
+    + Headers
+        
+            accept: image/png 
+
++ Response 200 (image/png)
+
+    + Body
+    
+            �PNG
+
+# Group Proposal Predictions
+This is a group of all rest resources related to predictions
+
+## CarSharing Predictions [/cip-heatmap/rest/prediction/carsharing]    
+A list of carSharing predictions for specific time, _one_ or _multiple_ locations and for specified service provider ids. The providerIds can be empty -> returns data for all available service providers!
+
+### Calculating CarSharing Predictions [POST]
+
++ Request
+
+        {
+            "predictionType": "CarSharing"
+            "predictionDateTime": “1404892800000”,
+            "locations": [
+                    {
+                        "latitude": 52.51774,
+                        "longitude": 13.38868,
+                        "system": "WGS_84"
+                    },
+                    {
+                        "latitude": 52.71774,
+                        "longitude": 13.37868,
+                        "system": "WGS_84"
+                    } 
+            ],
+            "providerIds": [1,4,6]
+        }
+
+
++ Response 201 (application/json)
+
+            [
+                {
+                   "predictionType": "CarSharing",
+                   "predictionDateTime": 1404892800000,
+                   "location":
+                        {
+                            "latitude": 52.51774,
+                            "longitude": 13.38868,
+                            "system": "WGS_84"
+                        },
+                   "providerIds": [1,4,6]
+                   "availability": 1.1199999999999999,
+                   "error": 0.06637626346350567
+                   
+                },
+                {
+                   "predictionType": "CarSharing",
+                   "predictionDateTime": 1404892800000,
+                   "location":
+                        {
+                            "latitude": 52.51774,
+                            "longitude": 13.38868,
+                            "system": "WGS_84"
+                        },
+                   "providerIds": [1,4,6],
+                   "availability": NaN,
+                   "error": NaN
+                   
+                },
+                {
+                   "predictionType": "CarSharing",
+                   "predictionDateTime": 1404892800000,
+                   "location":
+                        {
+                            "latitude": 52.51774,
+                            "longitude": 13.38868,
+                            "system": "WGS_84"
+                        },
+                   "providerIds": [1,4,6],
+                   "availability": 0.06666666666666667,
+                   "error": 0.041659852856931086
+                }
+            ]
+
+
+## BikeSharing Predictions [/cip-heatmap/rest/prediction/bikesharing]    
+
+
+### Calculating BikeSharing Predictions [POST]
+
++ Request
+
+        {
+            "predictionType": "BikeSharing"
+            "predictionDateTime": “1404892800000”,
+            "locations": [
+                    {
+                        "latitude": 52.51774,
+                        "longitude": 13.38868,
+                        "system": "WGS_84"
+                    },
+                    {
+                        "latitude": 52.71774,
+                        "longitude": 13.37868,
+                        "system": "WGS_84"
+                    } 
+            ],
+            "providerIds": [1,4,6]
+        }
+
+
++ Response 201 (application/json)
+
+            [
+                {
+                   "predictionType": "BikeSharing",
+                   "predictionDateTime": 1404892800000,
+                   "location":
+                        {
+                            "latitude": 52.51774,
+                            "longitude": 13.38868,
+                            "system": "WGS_84"
+                        },
+                   "providerIds": [1,4,6]
+                   "availability": 1.1199999999999999,
+                   "error": 0.06637626346350567
+                   
+                },
+                {
+                   "predictionType": "CarSharing",
+                   "predictionDateTime": 1404892800000,
+                   "location":
+                        {
+                            "latitude": 52.51774,
+                            "longitude": 13.38868,
+                            "system": "WGS_84"
+                        },
+                   "providerIds": [1,4,6],
+                   "availability": NaN,
+                   "error": NaN
+                   
+                },
+                {
+                   "predictionType": "CarSharing",
+                   "predictionDateTime": 1404892800000,
+                   "location":
+                        {
+                            "latitude": 52.51774,
+                            "longitude": 13.38868,
+                            "system": "WGS_84"
+                        },
+                   "providerIds": [1,4,6],
+                   "availability": 0.06666666666666667,
+                   "error": 0.041659852856931086
+                }
+            ]
+
+# Group Proposal Historcal Data
+This is a group of all rest resources related to historical data about carSharing and bikeSharing
+
+
+## CarSharing Historical Data [/cip-heatmap/rest/history/carsharing?startdate={startdate}&enddate={enddate}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&providerIds={ids}]    
+A list of carSharing histtorical data for specific dateTime, an optional bounding box (if not specified -> data for all Berlin) and for the certain service provider ids. The providerIds can be empty -> returns data for all available service providers!
+
+### Getting Historical Data for CarSharing [GET]
+
++ Parameters
+    + startdate (required, string, `1404892800000`) ... a date in the history.
+    + enddate (required, string, `1404893800000`) ... a date in the history bigger that startdate.
+    + lllat (optional, string, `52.482780222078205`) ... if not specified -> returns data for Berlin
+    + lllng (optional, string, `13.3154296875`) ...     if not specified -> returns data for Berlin
+    + rulng (optional, string, `13.359375`) ... if not specified -> returns data for Berlin
+    + rulat (optional, string, `52.50953477032729`) ... if not specified -> returns data for Berlin
+    + ids (optional, string, `1,3,4`) ... service provider ids, comma-separated list of numbers. If not specified -> returns data for all available providers
+
+
++ Response 200 (application/json)
+
+        [{
+            "addressCity": null,
+            "addressCityCode": null,
+            "addressHouseNo": null,
+            "addressStreet": null,
+            "historyTime": 1402999372000,
+            "latitude": 52.52386,
+            "longitude": 13.20386,
+            "model": null,
+            "scDescription": "B-GO2511",
+            "seatCount": null,
+            "fueltypeName": "UNKNOWN",
+            "operatorName": "Car2Go_Berlin",
+            "operatorType": "SC",
+            "providerName": "car2Go",
+            "providerType": "SC"
+            },
+            {
+            "addressCity": null,
+            "addressCityCode": null,
+            "addressHouseNo": null,
+            "addressStreet": null,
+            "historyTime": 1402999372000,
+            "latitude": 52.53243,
+            "longitude": 13.27418,
+            "model": null,
+            "scDescription": "B-GO3454",
+            "seatCount": null,
+            "fueltypeName": "UNKNOWN",
+            "operatorName": "Car2Go_Berlin",
+            "operatorType": "SC",
+            "providerName": "car2Go",
+            "providerType": "SC"
+        }]
+        
+        
+## BikeSharing Historical Data [/cip-heatmap/rest/history/bikesharing?startdate={startdate}&enddate={enddate}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&providerIds={ids}]    
+A list of bikeSharing historical data for specific dateTime, an optional bounding box (if not specified -> data for all Berlin) and for the certain service provider ids. The providerIds can be empty -> returns data for all available service providers!
+
+### Getting Historical Data for CarSharing [GET]
+
++ Parameters
+    + startdate (required, string, `1404892800000`) ... a date in the history.
+    + enddate (required, string, `1404893800000`) ... a date in the history bigger that startdate.
+    + lllat (optional, string, `52.482780222078205`) ... if not specified -> returns data for Berlin
+    + lllng (optional, string, `13.3154296875`) ...     if not specified -> returns data for Berlin
+    + rulng (optional, string, `13.359375`) ... if not specified -> returns data for Berlin
+    + rulat (optional, string, `52.50953477032729`) ... if not specified -> returns data for Berlin
+    + ids (optional, string, `1,3,4`) ... service provider ids, comma-separated list of numbers. If not specified -> returns data for all available providers
+
+
++ Response 200 (application/json)
+
+        [{
+            "addressCity": null,
+            "addressCityCode": null,
+            "addressHouseNo": null,
+            "addressStreet": null,
+            "historyTime": 1402999372000,
+            "latitude": 52.52386,
+            "longitude": 13.20386,
+            "model": null,
+            "scDescription": "B-GO2511",
+            "seatCount": null,
+            "fueltypeName": "UNKNOWN",
+            "operatorName": "Car2Go_Berlin",
+            "operatorType": "SC",
+            "providerName": "car2Go",
+            "providerType": "SC"
+            },
+            {
+            "addressCity": null,
+            "addressCityCode": null,
+            "addressHouseNo": null,
+            "addressStreet": null,
+            "historyTime": 1402999372000,
+            "latitude": 52.53243,
+            "longitude": 13.27418,
+            "model": null,
+            "scDescription": "B-GO3454",
+            "seatCount": null,
+            "fueltypeName": "UNKNOWN",
+            "operatorName": "Car2Go_Berlin",
+            "operatorType": "SC",
+            "providerName": "car2Go",
+            "providerType": "SC"
+        }]
+        
+        
+# Group Proposal Service Provider
+This is a group of all rest resources related to service provider carSharing and bikeSharing. They are needed to determe CIP internal provider ids to be able to request predictions. (See above)
+
+
+## Provider [/cip-heatmap/rest/providers/{id}]    
+A list of carSharing histtorical data for specific dateTime, an optional bounding box (if not specified -> data for all Berlin) and for the certain service provider ids. The providerIds can be empty -> returns data for all available service providers!
+
+### Retrieve a single provider [GET]
+
++ Parameters
+    + id (required, string, `1`) ... a provider id as number.  
+    
++ Response 200 (application/json)
+
+        {
+            "id": "1",
+            "name": "Car2Go",
+            "type": "Free-floating CarSharing"
+        }
+        
+ 
+## Provider Collection [/cip-heatmap/rest/providers]      
+
+### Retrieve all providers [GET]
+    
++ Response 200 (application/json)
+
+        [
+            {
+                "id": "1",
+                "name": "Car2Go",
+                "type": "Free-floating CarSharing"
+            },
+            {
+                "id": "2",
+                "name": "Flinkster",
+                "type": "Free-floating CarSharing"
+            },
+            {
+                "id": "3",
+                "name": "Flinkster",
+                "type": "Station-based CarSharing"
+            }
+        ]
