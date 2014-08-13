@@ -193,17 +193,17 @@ error | Double | example 0.0465 or NaN if no prediction could be made (interpret
 This is a group of all rest resources related to heatmap as PNG file
 
 ## CarSharing Heatmap [/cip-heatmap/rest/wms/carsharing?date={x}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&providerIds={ids}]    
-Get WMS PNG file for carsharing for a specific date, a specific bounding box (place) and for specific providers (e.g. 1 flinkster staion car, 2 flinkster free floating car, 3 car2fo, etc.)
+Get WMS PNG file for carsharing for a specific date, a specific bounding box (place) and for specific providers (e.g. 1 flinkster staion car, 2 flinkster free floating car, 3 car2go, etc.)
 
 ### Getting heatmap as PNG image [GET]
 
 + Parameters
-    + date (required, string, `1404892800000`) ... a date in the history (later also in the future) Has example value.
+    + date (required, string, `1404892800000`) ... a date in the history or in the future. Has example value.
     + lllat (required, string, `52.482780222078205`) ... 
     + lllng (required, string, `13.3154296875`) ...     
     + rulng (required, string, `13.359375`) ... 
     + rulat (required, string, `52.50953477032729`) ... 
-    + ids (optional, string, `1,3,4`) ... service provider ids, comma-separated list of numbers. If not specified -> returns image for all available providers
+    + ids (optional, string, `1,3,4`) ... service operator ids, comma-separated list of numbers (or strings?). If not specified -> returns image for all available providers
 
 + Request
 
@@ -224,12 +224,12 @@ Get WMS PNG file for bike for a specific date, a specific bounding box (place) a
 ### Getting heatmap as PNG image [GET]
 
 + Parameters
-    + date (required, string, `1404892800000`) ... a date in the history (later also in the future) Has example value.
+    + date (required, string, `1404892800000`) ... a date in the history or in the future. Has example value.
     + lllat (required, string, `52.482780222078205`) ... 
     + lllng (required, string, `13.3154296875`) ...     
     + rulng (required, string, `13.359375`) ... 
     + rulat (required, string, `52.50953477032729`) ... 
-    + ids (optional, string, `1,3,4`) ... service provider ids, comma-separated list of numbers. If not specified -> returns image for all available providers
+    + ids (optional, string, `1,3,4`) ... service operator ids, comma-separated list of numbers (or strings?). If not specified -> returns image for all available providers
 
 + Request
 
