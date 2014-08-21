@@ -189,6 +189,23 @@ error | Double | example 0.0465 or NaN if no prediction could be made (interpret
             }
         ]
         
+## Precalculate CarSharing Predictions [/cip-heatmap/rest/prediction/carsharing/precalculate_all]
+In order to generate WMS of prediction data, the data has to be preprocessed and saved to DB. The prognosis is calculated and saved into Oracle. 
+This servcie truncates all existing preprocessed car sharing availability prognosis from DB. Then it calculates the prognosis of all car sharing availabilities of the next three days.
+The prognosis is calculated from call-time to three days into the future. 
+It is calculated for each full hour. 
+It is calculated for each provider separately and aggregated for all providers that have been active since 07/25/2014 19:02:54 (the ETL process changed at that time).
+
+No respones is sent. The data structure of the response contains the following attributes: 
+
+attribute | json data type | comments
+--- | --- | ---
+
+### Trigger the precalculation of CarSharing Predictions [GET]
+
++ Response 200 (application/json)
+
+        
 # Group Heatmap
 This is a group of all rest resources related to heatmap as PNG file
 
