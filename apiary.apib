@@ -2,7 +2,7 @@ FORMAT: 1A
 HOST: http://172.27.102.2:8080
 
 # CIP
-Citi Intelligence Platform.
+City Intelligence Platform.
 CIP retrieves regularly the positions of sharable cars in Berlin from IMP. They provide an API that offers the retrieval of historical as well as predicted data. In future a WMS service is also planned.
  
 # Introduction
@@ -227,15 +227,15 @@ Implemented!
 This is a group of all rest resources related to heatmap as PNG file.
 Host: http://172.27.102.2:8080 is the host. Note: You need to connect via the CIP VPN client.
 
-## CarSharing Heatmap [/cip-heatmap/rest/wms/carsharing?date={x}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&providerIds={ids}]    
+## CarSharing Heatmap [/cip-heatmap/rest/wms/carsharing?date={x}&left_lower_lng={lllng}&left_lower_lat={lllat}&right_upper_lng={rulng}&right_upper_lat={rulat}&providerIds={ids}]    
 Get WMS PNG file for carsharing for a specific date, a specific bounding box (place) and for specific providers (e.g. 1 flinkster staion car, 2 flinkster free floating car, 3 car2go, etc.)
 
 ### Getting heatmap as PNG image [GET]
 
 + Parameters
     + date (required, string, `1404892800000`) ... a date in the history or in the future. Has example value.
-    + lllat (required, string, `52.482780222078205`) ... 
     + lllng (required, string, `13.3154296875`) ...     
++ lllat (required, string, `52.482780222078205`) ... 
     + rulng (required, string, `13.359375`) ... 
     + rulat (required, string, `52.50953477032729`) ... 
     + ids (optional, string, `1,3,4`) ... service operator ids, comma-separated list of numbers (or strings?). If not specified -> returns image for all available providers
@@ -253,15 +253,15 @@ Get WMS PNG file for carsharing for a specific date, a specific bounding box (pl
             �PNG
 
 
-## BikeSharing Heatmap [/cip-heatmap/rest/wms/bikesharing?date={x}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&providerIds={ids}]    
+## BikeSharing Heatmap [/cip-heatmap/rest/wms/bikesharing?date={x}&left_lower_lng={lllng}&left_lower_lat={lllat}&right_upper_lng={rulng}&right_upper_lat={rulat}&providerIds={ids}]    
 Get WMS PNG file for bike for a specific date, a specific bounding box (place) and for specific providers (e.g. 7 nextbike, 8 callAbike, etc.)
 
 ### Getting heatmap as PNG image [GET]
 
 + Parameters
     + date (required, string, `1404892800000`) ... a date in the history or in the future. Has example value.
++ lllng (required, string, `13.3154296875`) ... 
     + lllat (required, string, `52.482780222078205`) ... 
-    + lllng (required, string, `13.3154296875`) ...     
     + rulng (required, string, `13.359375`) ... 
     + rulat (required, string, `52.50953477032729`) ... 
     + ids (optional, string, `1,3,4`) ... service operator ids, comma-separated list of numbers (or strings?). If not specified -> returns image for all available providers
@@ -427,12 +427,12 @@ A list of carSharing predictions for specific time, _one_ or _multiple_ location
                 }
             ]
 
-# Group Proposal Historcal Data
+# Group Proposal Historical Data
 Not yet implemented!
 This is a group of all rest resources related to historical data about carSharing and bikeSharing
 
 
-## CarSharing Historical Data [/cip-heatmap/rest/history/carsharing?startdate={startdate}&enddate={enddate}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&providerIds={ids}]    
+## CarSharing Historical Data [/cip-heatmap/rest/history/carsharing?startdate={startdate}&enddate={enddate}&left_lower_lng={lllng}&left_lower_lat={lllat}&right_upper_lng={rulng}&right_upper_lat={rulat}&providerIds={ids}]    
 A list of carSharing histtorical data for specific dateTime, an optional bounding box (if not specified -> data for all Berlin) and for the certain service provider ids. The providerIds can be empty -> returns data for all available service providers!
 
 ### Getting Historical Data for CarSharing [GET]
@@ -440,8 +440,8 @@ A list of carSharing histtorical data for specific dateTime, an optional boundin
 + Parameters
     + startdate (required, string, `1404892800000`) ... a date in the history.
     + enddate (required, string, `1404893800000`) ... a date in the history bigger that startdate.
++ lllng (optional, string, `13.3154296875`) ... if not specified -> returns data for Berlin
     + lllat (optional, string, `52.482780222078205`) ... if not specified -> returns data for Berlin
-    + lllng (optional, string, `13.3154296875`) ...     if not specified -> returns data for Berlin
     + rulng (optional, string, `13.359375`) ... if not specified -> returns data for Berlin
     + rulat (optional, string, `52.50953477032729`) ... if not specified -> returns data for Berlin
     + ids (optional, string, `1,3,4`) ... service provider ids, comma-separated list of numbers. If not specified -> returns data for all available providers
@@ -485,7 +485,7 @@ A list of carSharing histtorical data for specific dateTime, an optional boundin
         }]
         
         
-## BikeSharing Historical Data [/cip-heatmap/rest/history/bikesharing?startdate={startdate}&enddate={enddate}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&providerIds={ids}]    
+## BikeSharing Historical Data [/cip-heatmap/rest/history/bikesharing?startdate={startdate}&enddate={enddate}&left_lower_lng={lllng}&left_lower_lat={lllat}&right_upper_lng={rulng}&right_upper_lat={rulat}&providerIds={ids}]    
 A list of bikeSharing historical data for specific dateTime, an optional bounding box (if not specified -> data for all Berlin) and for the certain service provider ids. The providerIds can be empty -> returns data for all available service providers!
 
 ### Getting Historical Data for CarSharing [GET]
@@ -493,8 +493,8 @@ A list of bikeSharing historical data for specific dateTime, an optional boundin
 + Parameters
     + startdate (required, string, `1404892800000`) ... a date in the history.
     + enddate (required, string, `1404893800000`) ... a date in the history bigger that startdate.
++ lllng (optional, string, `13.3154296875`) ... if not specified -> returns data for Berlin
     + lllat (optional, string, `52.482780222078205`) ... if not specified -> returns data for Berlin
-    + lllng (optional, string, `13.3154296875`) ...     if not specified -> returns data for Berlin
     + rulng (optional, string, `13.359375`) ... if not specified -> returns data for Berlin
     + rulat (optional, string, `52.50953477032729`) ... if not specified -> returns data for Berlin
     + ids (optional, string, `1,3,4`) ... service provider ids, comma-separated list of numbers. If not specified -> returns data for all available providers
