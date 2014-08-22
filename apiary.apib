@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: https://158.226.1.139:8088/
+HOST: http://172.27.102.2:8080
 
 # CIP
 Citi Intelligence Platform.
@@ -224,7 +224,8 @@ attribute | json data type | comments
 
         
 # Group Heatmap
-This is a group of all rest resources related to heatmap as PNG file
+This is a group of all rest resources related to heatmap as PNG file.
+Host: http://172.27.102.2:8080 is the host. You need to connect via VPN client. See the attachement in the story.
 
 ## CarSharing Heatmap [/cip-heatmap/rest/wms/carsharing?date={x}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&providerIds={ids}]    
 Get WMS PNG file for carsharing for a specific date, a specific bounding box (place) and for specific providers (e.g. 1 flinkster staion car, 2 flinkster free floating car, 3 car2go, etc.)
