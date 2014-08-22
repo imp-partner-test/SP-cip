@@ -8,8 +8,7 @@ CIP retrieves regularly the positions of sharable cars in Berlin from IMP. They 
 # Introduction
 
 This is a description of a public REST interface offered by CIP.
-A mockup of this interface can be tried using the URLs listed on the right. For access to the production
-system please write an email to ?? 
+A mockup of this interface can be tried using the URLs listed on the right. For access to the production system use the host URL and a lifestreet VPN client! 
 
 # Group CarSharing Historical Data
 This is a group of all rest resources related to car sharing historical data of operator type SC.
@@ -224,8 +223,9 @@ attribute | json data type | comments
 
         
 # Group Heatmap
+Implemented!
 This is a group of all rest resources related to heatmap as PNG file.
-Host: http://172.27.102.2:8080 is the host. You need to connect via VPN client. See the attachement in the story.
+Host: http://172.27.102.2:8080 is the host. Note: You need to connect via the CIP VPN client.
 
 ## CarSharing Heatmap [/cip-heatmap/rest/wms/carsharing?date={x}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&providerIds={ids}]    
 Get WMS PNG file for carsharing for a specific date, a specific bounding box (place) and for specific providers (e.g. 1 flinkster staion car, 2 flinkster free floating car, 3 car2go, etc.)
@@ -279,6 +279,7 @@ Get WMS PNG file for bike for a specific date, a specific bounding box (place) a
             �PNG
 
 # Group Proposal Predictions
+Not yet implemented!
 This is a group of all rest resources related to predictions
 
 ## CarSharing Predictions [/cip-heatmap/rest/prediction/carsharing]    
@@ -427,6 +428,7 @@ A list of carSharing predictions for specific time, _one_ or _multiple_ location
             ]
 
 # Group Proposal Historcal Data
+Not yet implemented!
 This is a group of all rest resources related to historical data about carSharing and bikeSharing
 
 
@@ -537,6 +539,7 @@ A list of bikeSharing historical data for specific dateTime, an optional boundin
         
         
 # Group Proposal Service Provider
+Not yet implemented!
 This is a group of all rest resources related to service provider carSharing and bikeSharing. They are needed to determe CIP internal provider ids to be able to request predictions. (See above)
 
 
