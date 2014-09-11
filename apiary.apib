@@ -223,15 +223,15 @@ attribute | json data type | comments
 
         
 # Group Heatmap
-Implemented!
 This is a group of all rest resources related to heatmap as PNG file.
 Host: http://172.27.102.2:8080 is the host. Note: You need to connect via the CIP VPN client.
 
 ## CarSharing Heatmap [/cip-heatmap/rest/wms/carsharing?date={datex}&left_lower_lng={lllng}&left_lower_lat={lllat}&right_upper_lng={rulng}&right_upper_lat={rulat}&providerIds={ids}&width={width}&height={height}]    
+Implemented!
 Get WMS PNG file for carsharing for a specific date (in the history or future), a specific bounding box (place) and for specific providers (e.g. 1 flinkster staion car, 2 flinkster free floating car, 3 car2go, etc.). 
 Optionally the width and height of the generated image may be specified, defaults to 512 x 512
 
-### Getting heatmap as PNG image [GET]
+### Getting carsharing heatmap as PNG image [GET]
 
 + Parameters
     + datex (required, string, `1404892800000`) ... a date in the history (historical heatmap with green dots) or in the future (prediction heatmap with blue dots). Has example value.
@@ -259,7 +259,7 @@ Optionally the width and height of the generated image may be specified, default
 ## BikeSharing Heatmap [/cip-heatmap/rest/wms/bikesharing?date={x}&left_lower_lng={lllng}&left_lower_lat={lllat}&right_upper_lng={rulng}&right_upper_lat={rulat}&providerIds={ids}]    
 Get WMS PNG file for bike for a specific date, a specific bounding box (place) and for specific providers (e.g. 7 nextbike, 8 callAbike, etc.)
 
-### Getting heatmap as PNG image [GET]
+### Getting bikesharing heatmap as PNG image [GET]
 
 + Parameters
     + date (required, string, `1404892800000`) ... a date in the history or in the future. Has example value.
@@ -280,6 +280,36 @@ Get WMS PNG file for bike for a specific date, a specific bounding box (place) a
     + Body
     
             �PNG
+
+## Eventing Heatmap [/cip-heatmap/rest/wms/eventing?sDate={date1}&eDate={date2}&left_lower_lng={lllng}&left_lower_lat={lllat}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={width}&height={height}]    
+! Under development!
+Get WMS PNG file for eventing service for a specific time slot (in the history or future), specific bounding box (place). 
+Optionally the width and height of the generated image may be specified, defaults to 512 x 512
+
+### Getting events heatmap as PNG image [GET]
+
++ Parameters
+    + date1 (required, string, `1404892800000`) ... start date in the history or in the future. Has example value.
+    + date2 (required, string, `1404892900000`) ... end date in the history or in the future. Has example value.
+    + lllng (required, string, `13.3154296875`) ...   
+    + lllat (required, string, `52.482780222078205`) ... 
+    + rulng (required, string, `13.359375`) ... 
+    + rulat (required, string, `52.50953477032729`) ... 
+    + width (optional, string, `512`) ... the width of the heatmap. Default value: 512
+    + height (optional, string, `512`) ... the height of the heatmap. Default value: 512
+
++ Request
+
+    + Headers
+        
+            accept: image/png 
+
++ Response 200 (image/png)
+
+    + Body
+    
+            �PNG
+
 
 # Group Proposal Predictions
 Not yet implemented!
