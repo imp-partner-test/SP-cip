@@ -281,7 +281,7 @@ Get WMS PNG file for bike for a specific date, a specific bounding box (place) a
     
             �PNG
 
-## Eventing Heatmap [/cip-heatmap/rest/wms/eventing?sDate={date1}&eDate={date2}&left_lower_lng={lllng}&left_lower_lat={lllat}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={width}&height={height}]    
+## Eventing Heatmap [/cip-heatmap/rest/wms/eventing?startDate={date1}&endDate={date2}&left_lower_lng={lllng}&left_lower_lat={lllat}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={width}&height={height}]    
 ! Under development!
 Get WMS PNG file for eventing service for a specific time slot (in the history or future), specific bounding box (place). 
 Optionally the width and height of the generated image may be specified, defaults to 612 x 512
@@ -289,12 +289,12 @@ Optionally the width and height of the generated image may be specified, default
 ### Getting events heatmap as PNG image [GET]
 
 + Parameters
-    + date1 (required, string, `1404892800000`) ... start date in the history or in the future. Has example value.
-    + date2 (required, string, `1404892900000`) ... end date in the history or in the future. Has example value.
-    + lllng (required, string, `13.3154296875`) ...   
-    + lllat (required, string, `52.482780222078205`) ... 
-    + rulng (required, string, `13.359375`) ... 
-    + rulat (required, string, `52.50953477032729`) ... 
+    + date1 (required, string, `1410307200000`) ... start date in the history or in the future. Has example value.
+    + date2 (required, string, `1418169600000`) ... end date in the history or in the future. Has example value.
+    + lllng (required, string, `13.030338`) ...   
+    + lllat (required, string, `52.38294`) ... 
+    + rulng (required, string, `13.556067`) ... 
+    + rulat (required, string, `52.638559`) ... 
     + width (optional, string, `612`) ... the width of the heatmap. Default value: 612
     + height (optional, string, `512`) ... the height of the heatmap. Default value: 512
 
